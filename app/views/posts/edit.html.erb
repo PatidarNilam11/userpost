@@ -1,7 +1,5 @@
 <h1>Edit Post</h1>
 
-
-
 <%= form_with model: @post do |form| %>
 
     <%= form.label :title %>
@@ -13,6 +11,12 @@
    <%= form.label :description %>
 	<%= form.text_area :description %>
 	<br>
+    <br>
+
+    <%= form.label :image %>
+	<%= form.file_field :image%>
+	<br>
+	
 
     <%= form.submit %>
-    <% end %>
+<% end %>

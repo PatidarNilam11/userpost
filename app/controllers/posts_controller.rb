@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+
   def new
     @post = Post.new
   end
@@ -28,13 +29,35 @@ end
 
   def destroy
     @post = Post.find(params[:id])
-      @post.destroy
-       redirect_to "/"
-end
+    @post.destroy
+    redirect_to "/"
+   end
 
 
-  private
-  def post_params
-    params.require(:post).permit(:title, :description, :category_id, :active)
+  def like_post
+  @post = Post.find(params[:id])
+  current_user_like = @post.likes.find_by(user_id: current_user.id)
+
+  if current_user_like
+    current_user_like.update(active: false)
+
+  else
+    @post.likes.create(user_id: current_user.id)
   end
+
+  redirect_to root_path
+  end
+
+  def search
+    if params[:search].blank?
+      redirect_to post_path
+    else
+      @posts = Post.all.where("title LIKE ? OR description LIKE ?", "%#{params[:search]}%", "%#{params[:search]}%")
+    end
+  end
+
+  private                           
+    def post_params
+      params.require(:post).permit(:title, :description, :image, :category_id, :active)
+    end
 end

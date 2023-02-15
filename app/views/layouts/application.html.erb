@@ -14,16 +14,15 @@
     <div>
       <h1 style="background: green">Header</h1>
       <% if user_signed_in? %>
-        <%= button_to "sign out", destroy_user_session_path, method: :delete %>
+        <%= button_to "sign out", destroy_user_session_path, method: :delete, confirm: "Are you sure" %>
         <%= button_to "New Post", new_post_path, method: :get %>
 
       <% else %>
         <%= link_to "sign up", new_user_registration_path %>
         <%= link_to "sign in", new_user_session_path %>
-       
-      <% end %> 
+     <% end %> 
 
-     
+
     </div>
     <%= yield %>
     <div><h1 style="background: green; position: fixed; bottom: 0; width: 100%">Footer<h1></div>

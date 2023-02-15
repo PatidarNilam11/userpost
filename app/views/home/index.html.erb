@@ -1,16 +1,25 @@
+
+<%= form_tag search_posts_path, method: :GET  %>
+  <%= text_field_tag(:search,params[:search]) %>
+  <%= submit_tag ('search')%> <br>
+
 <h1>Dashbord</h1>
+
 <% @posts.each do |f| %>
 
     <b>Title:</b><%= f.title %><br>
     <b>Description:</b><%= f.description%><br>
 
+
+    <p>Image: <%= image_tag f.image if f.image.attached? %> </p>
+    
     <%= f.likes.size %> <%= (f.likes.size) == 1 ? 'Like' : 'Likes'%>
 
-  <% pre_like = f.likes.where(active: true).find { |like| like.user_id == current_user.id} %>
+  <% pre_like = f.likes.where(user_id: current_user).any? %>
     <% if pre_like %>
-      <%= button_to 'Unlike', post_likes_path(f), method: :post %>
+      <%= button_to 'Unlike', like_post_post_path(f), method: :put %>
     <% else %>
-      <%= button_to 'Like', post_likes_path(f), method: :post %>
+      <%= button_to 'Like', like_post_post_path(f), method: :put %>
     <% end %>
   
     <%= button_to "Edit", edit_post_path(f), { :method => :get } %>

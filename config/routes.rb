@@ -8,7 +8,6 @@ Rails.application.routes.draw do
     put 'like_post'
   end
 
-  
   collection do
     get :search
   end

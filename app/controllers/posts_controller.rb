@@ -1,5 +1,4 @@
 class PostsController < ApplicationController
-
   def new
     @post = Post.new
   end
@@ -47,7 +46,7 @@ end
 
   redirect_to root_path
   end
-
+  
   def search
     if params[:search].blank?
       redirect_to post_path

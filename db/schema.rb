@@ -8,7 +8,7 @@
 # migrations from scratch. Old migrations may fail to apply correctly if those
 # migrations use external dependencies or application code.
 #
-# It is strongly recommended that you check this file into your version control system.
+# It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.0].define(version: 2023_02_13_100519) do
   create_table "active_storage_attachments", force: :cascade do |t|
@@ -45,8 +45,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_13_100519) do
     t.boolean "active"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "category_id"
-    t.integer "user_id"
   end
 
   create_table "likes", force: :cascade do |t|
@@ -62,8 +60,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_13_100519) do
   create_table "posts", force: :cascade do |t|
     t.string "title"
     t.text "description"
-    t.integer "user_id", null: false
-    t.integer "category_id", null: false
+    t.string "category_name"
+    t.integer "user_id"
+    t.integer "category_id"
     t.boolean "active"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -92,6 +91,4 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_13_100519) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "posts", "categories"
-  add_foreign_key "posts", "users"
 end
